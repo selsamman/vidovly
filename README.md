@@ -3,7 +3,7 @@
 A video overlay framework bundled as web-components.  You can use this out of the box by including this script:
 
 ```
-<script src="https://unpkg/vidovly/index.modern.js"></script>
+<script src="https://unpkg.com/vidovly@1.0.1/dist/index.modern.js"></script>
 ```
 
 Then you can define a video with overlays like this:
