@@ -8,7 +8,7 @@
   "umd:main": "dist/index.umd.js",
   "scripts": {
     "dev": "preact watch --template src/template.html",
-    "build:widget": "microbundle build --external none --compress false",
+    "build:widget": "microbundle build --external none",
     "build:lib": "microbundle build -i src/component.tsx",
     "build": "preact build",
     "lint": "eslint '{src,tests}/**/*.{ts,tsx}'",
