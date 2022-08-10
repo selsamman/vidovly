@@ -77,7 +77,7 @@ export const YouTube = (
 
             ref.current?.dispatchEvent(new CustomEvent('getOverlayInterfaces', {bubbles: true, detail: {value:
                         (overlayInterfaces : Array<OverlayInterface>) => overlayInterfacesRef.current = overlayInterfaces}}));
-            console.log('Player Ready ' + id + " " + ref.current);
+            console.log('Player Ready ' + id);
 
 
             const vi = new YouTubeVideo(player);
@@ -94,7 +94,7 @@ export const YouTube = (
         //    The function indicates that when playing a video (state=1),
         //    the player should play for six seconds and then stop.
         function onPlayerStateChange(event: any) {
-            console.log(`Player State: ${event.data}`);
+            //console.log(`Player State: ${event.data}`);
         }
 
         return () => {

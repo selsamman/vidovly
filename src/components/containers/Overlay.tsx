@@ -126,7 +126,7 @@ export const Overlay = (
 
     const classNameResolved = "vovlyOverlay" + (className ? ` ${className}` : "");
 
-    console.log(`${fade} ${classNameResolved} ${styleLiteral} ${visible}`);
+    //console.log(`${fade} ${classNameResolved} ${styleLiteral} ${visible}`);
 
     return (
         <div ref={ref} style={{width: '100%', height: '100%'}}>

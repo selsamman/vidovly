@@ -12,7 +12,7 @@ export const VideoOverlayContainer = ({video, overlays} : {video : any, overlays
 
     const [height, setHeight] = useState(0);
     const [fontSize, setFontSize] = useState(10);
-    console.log('Render VideoOverlayContainer ' + height);
+    //console.log('Render VideoOverlayContainer ' + height);
 
     // Once per mount get the correct height for the container based on width
     useLayoutEffect(() => {
@@ -26,7 +26,6 @@ export const VideoOverlayContainer = ({video, overlays} : {video : any, overlays
     return height === 0 ? (<div  ref={ref}>waiting</div>) : (
         <div  ref={ref} id="app" style={{...videoOverlayContainerStyle, height: height, fontSize}}>
             <div style={{...videoContainerStyle}}>
-                <style>{`.overlay{ background-color: red;}`}</style>
                 {video}
             </div>
             <div style={{...overlayContainerStyle}}>

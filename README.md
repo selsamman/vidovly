@@ -1,16 +1,18 @@
 # vidOvly
 
-A video overlay framework bundled as web-components.  You can use this out of the box by including this script:
+A video overlay framework bundled as web-components which lets you define overlays to be applied over a video using markup much like this:
 
 ```
-<script src="https://unpkg.com/vidovly@1.0.1/dist/index.modern.js"></script>
-```
-
-Then you can define a video with overlays like this:
-
-```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Video Overlay</title>
+  </head>
+  <body>
+  
     <vidovly-container fade=2>
-        <vidovly-video>
+      <vidovly-video>
         <div slot="video" style="width: 100%; height: 100%">
           <vidovly-youtube-player id="Wt2mo8GLY6s" />
         </div>
@@ -26,10 +28,22 @@ Then you can define a video with overlays like this:
           <vidovly-overlay position="10-35-25-5" time="32:38">Wine</vidovly-overlay>
           <vidovly-overlay position="10-50-25-5" time="34:38">Beef Stock</vidovly-overlay>
         </div>
-      </vidovly-video>    </vidovly-container>
-```
+      </vidovly-video>
+    </vidovly-container>
 
-This defines several web-components:
+    <script src="https://unpkg.com/vidovly@1.0.2/dist/index.umd.js"></script>
+  
+  </body>
+</html>
+```
+You can use this script directly from unpkg.com to define the web-components.  It must come after the web-components are defined.
+
+```
+<script src="https://unpkg.com/vidovly@1.0.2/dist/index.umd.js"></script>
+```
+> Always check for latest version on NPM
+
+The script creates these web-components which use preact under the covers:
 
 ### vidovly-container
 The outer container around a video and the overlays. You can layout the container anyway you like and use the **vidovly-video** component within it to define the area where the video is to appear. **vidovly-container** has these optional parameters:

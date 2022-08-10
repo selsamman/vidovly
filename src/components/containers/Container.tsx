@@ -28,7 +28,7 @@ export const Container = (
 
          // Child gives us a card schedule
         ref.current.addEventListener('setOverlayInterface', (e : any) => {
-            console.log('setOverlayInterface');
+            //console.log('setOverlayInterface');
             const overlayInterface : OverlayInterface = e.detail.value;
             overlayInterface.overlayStyle = overlaystyle;
             overlayInterface.fadeTime = fade;
@@ -39,14 +39,14 @@ export const Container = (
 
         // Child requests the list of overlay interfaces, so we give them the array which may or may not be fully populated
         ref.current.addEventListener('getOverlayInterfaces', (e : any) => {
-            console.log('getOverlayInterfaces');
+            //console.log('getOverlayInterfaces');
             const setOverlayInterfaces : (interfaces : Array<OverlayInterface>) => void = e.detail.value;
             setOverlayInterfaces(overlayInterfacesRef.current);
          });
 
         // Child provides us with a video interface so we send it to any child who requested it
         ref.current.addEventListener('setVideoInterface', (e : any) => {
-            console.log('setVideoInterface');
+            //console.log('setVideoInterface');
             const video : VideoInterface = e.detail;
             setVideoInterfaceRef.current.forEach(setVideoInterface => video);
             setVideoInterfaceRef.current = [];

@@ -9,3 +9,5 @@ register(Container, 'vidovly-container', [], { shadow: true });
 register(VideoOverlayContainer, 'vidovly-video', [], { shadow: true });
 register(YouTube, 'vidovly-youtube-player', [], {shadow: false});
 register(Overlay, 'vidovly-overlay', [], { shadow: true });
+
+
