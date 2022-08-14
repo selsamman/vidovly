@@ -2,17 +2,14 @@ import { h } from 'preact';
 import { useRef, useLayoutEffect } from 'preact/hooks';
 import {VideoInterface} from "../../interfaces/VideoInterface";
 import {videoOverlayContainerStyle} from "../../style/shadowDom";
-import {OverlayInterface} from "./Overlay";
+import {OverlayInterface} from "../../interfaces/OverlayInterface";
 
-export const Container = (
-    {fade = 0, fadein = 0, fadeout = 0, overlaystyle = ""} :
-    {fade : number, fadein : number, fadeout : number, overlaystyle : string}
-) => {
+export const TopLevelContainer = () => {
 
     // Containing div reference for attaching events and getting container width for aspect ratio
     const ref : any = useRef<HTMLElement>(null);
 
-    // List of card schedules for each overlay
+    // List of interfaces for each overlay
     const overlayInterfacesRef = useRef<Array<OverlayInterface>>([]);
 
     // Video Interface once player gets started
@@ -28,14 +25,16 @@ export const Container = (
 
          // Child gives us a card schedule
         ref.current.addEventListener('setOverlayInterface', (e : any) => {
-            //console.log('setOverlayInterface');
+
             const overlayInterface : OverlayInterface = e.detail.value;
-            overlayInterface.overlayStyle = overlaystyle;
-            overlayInterface.fadeTime = fade;
-            overlayInterface.fadeInTime = fadein;
-            overlayInterface.fadeOutTime = fadeout;
-            overlayInterfacesRef.current.push(overlayInterface);
-        });
+            const oix = -1;//overlayInterfacesRef.current.findIndex(vi => vi.node?.innerHTML === overlayInterface.node?.innerHTML);
+            console.log('TopLevelContainer setOverlayInterface Event ' + oix);
+            if (oix >= 0)
+                overlayInterfacesRef.current[oix] = overlayInterface;
+            else
+                overlayInterfacesRef.current.push(overlayInterface);
+            overlayInterface.renderStyle();
+          });
 
         // Child requests the list of overlay interfaces, so we give them the array which may or may not be fully populated
         ref.current.addEventListener('getOverlayInterfaces', (e : any) => {
@@ -46,16 +45,16 @@ export const Container = (
 
         // Child provides us with a video interface so we send it to any child who requested it
         ref.current.addEventListener('setVideoInterface', (e : any) => {
-            //console.log('setVideoInterface');
-            const video : VideoInterface = e.detail;
-            setVideoInterfaceRef.current.forEach(setVideoInterface => video);
+            console.log('setVideoInterface');
+            const video : VideoInterface = e.detail.value;
+            setVideoInterfaceRef.current.forEach(setVideoInterface => setVideoInterface(video));
             setVideoInterfaceRef.current = [];
             videoInterfaceRef.current = video;
         });
 
         // Child requests a video interface so we provide it if we have it or keep callback until we do.
         ref.current.addEventListener('getVideoInterface', (e : any) => {
-            const setVideoInterface : (video : VideoInterface) => void = e.detail;
+            const setVideoInterface : (video : VideoInterface) => void = e.detail.value;
             if (videoInterfaceRef.current)
                 setVideoInterface(videoInterfaceRef.current)
             else

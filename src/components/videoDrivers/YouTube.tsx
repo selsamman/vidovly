@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import {useEffect, useRef} from "preact/hooks";
 import {VideoInterface}from "../../interfaces/VideoInterface";
-import {OverlayInterface} from "../containers/Overlay";
+import {OverlayInterface} from "../../interfaces/OverlayInterface";
 
 export const aspectRatio = 360 / 640;
 
@@ -11,7 +11,8 @@ class YouTubeVideo implements VideoInterface {
         this.player = player;
     }
     goTo (time : number) {
-        this.player.seekTo(time / 1000);
+        console.log(`Seek to ${time}`);
+        this.player.seekTo(time);
     }
     getTime () {
         return this.player.getCurrentTime ? this.player?.getCurrentTime() * 1000 : -1;
@@ -84,9 +85,6 @@ export const YouTube = (
             videoInterfaceRef.current = vi;
 
             ref.current?.dispatchEvent(new CustomEvent('setVideoInterface', {composed: true, bubbles: true, detail: {value: vi}}));
-
-
-
 
         }
 
